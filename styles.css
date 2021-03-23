@@ -1,0 +1,140 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+:root {
+  /* CUSTOM VARIABLES */
+  --primary-blue: hsl(220, 98%, 61%);
+  --primary-gradient: linear-gradient(
+    to right,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+  /* ### Light Theme */
+  --LightTheme-Light-Gray: hsl(0, 0%, 98%);
+  --LightTheme-Light-Grayish-Blue: hsl(236, 33%, 92%);
+  --LightTheme-Grayish-Blue: hsl(233, 11%, 84%);
+  --LightTheme-Dark-Grayish-Blue: hsl(236, 9%, 61%);
+  --LightTheme-Darkest-Grayish-Blue: hsl(235, 19%, 35%);
+
+  /* ### Dark Theme */
+  --DarkTheme-Dark-Blue: hsl(235, 21%, 11%);
+  --DarkTheme-Desaturated-Blue: hsl(235, 24%, 19%);
+  --DarkTheme-Light-Blue: hsl(234, 39%, 85%);
+  --DarkTheme-Hover-Light-Blue: hsl(236, 33%, 92%); /*hover*/
+  --DarkTheme-Grayish-Blue: hsl(234, 11%, 52%);
+  --DarkTheme-Dark-Grayish-Blue: hsl(233, 14%, 35%);
+  --DarkTheme-Darkest-Grayish-Blue: hsl(237, 14%, 26%);
+
+  /* BASE STYLING */
+  font-size: 18px;
+  font-family: "Josefin Sans", sans-serif;
+  background-color: var(--DarkTheme-Dark-Blue);
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+div,
+button,
+a {
+  color: var(--DarkTheme-Light-Blue);
+}
+
+html {
+  width: 100vw;
+  height: 100%;
+  overflow-x: hidden;
+  position: relative;
+  background: url(./images/bg-desktop-dark.jpg) center top no-repeat;
+  background-size: contain;
+}
+
+/* Layout  */
+.center {
+  box-sizing: content-box;
+  margin: 7vh auto;
+  min-height: 60vh;
+  max-width: 30vw;
+}
+
+.outer-stack {
+  --space: 2.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.outer-stack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.outer-stack > * + * {
+  margin-top: var(--space);
+}
+
+.outer-stack > :nth-child(3) {
+  margin-bottom: auto;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.inner-stack {
+  --space: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.inner-stackstack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.inner-stack > * + * {
+  margin-top: var(--space);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* typography */
+h1 {
+  font-family: Josefin Sans;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 40px;
+  letter-spacing: 15px;
+  margin: 0;
+}
+
+.input-field {
+  width: 100%;
+  background-color: var(--DarkTheme-Desaturated-Blue);
+  border-radius: 4px;
+}
+
+.modal {
+  background-color: var(--DarkTheme-Desaturated-Blue);
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+}
+
+.operations-group {
+  display: flex;
+  justify-content: space-between;
+}
