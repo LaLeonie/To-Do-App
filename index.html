@@ -18,38 +18,46 @@
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,400;1,500;1,600&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="container">
-      <div class="center">
-        <div class="outer-stack">
+      <div class="container-center">
           <div class="header">
             <h1>Todo</h1>
-            <button>0</button>
+            <button><i class="far fa-sun"></i></button>
           </div>
           <div class="inner-stack">
             <form class="input-field">
-              <input placeholder="new to do" type="text" />
+              <div class="list-item">
+              <input type="checkbox"/>
+              <input placeholder="Create a new to do..." type="text" />
+            </div>
             </form>
             <div class="modal">
               <ul>
-                <li>This is a to do item</li>
+                <li>
+                <label class="list-item">
+                  <input type="checkbox"/>
+				          <span>this is a task</span>
+                </label>
+              </li>
               </ul>
               <div class="operations-group">
                 <div>items left</div>
                 <div class="filter-group">
-                  <button>all</button>
-                  <button>active</button>
-                  <button>completed</button>
+                  <a class="show-all">all</a>
+                  <a class="show-active">active</a>
+                  <a class="show-completed">completed</a>
                 </div>
-                <button>clear completed</button>
+                <a class="clear-completed">clear completed</button>
               </div>
             </div>
           </div>
           <div>drag and drop to reorder</div>
-        </div>
       </div>
-    </div>
     <script type="text/javascript" src="app.js"></script>
   </body>
 </html>

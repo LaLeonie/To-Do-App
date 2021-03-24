@@ -51,38 +51,36 @@ a {
 
 html {
   width: 100vw;
-  height: 100%;
+  height: 100vh;
   overflow-x: hidden;
   position: relative;
   background: url(./images/bg-desktop-dark.jpg) center top no-repeat;
   background-size: contain;
 }
 
+/* -----BASE STYLING----- */
 /* Layout  */
-.center {
+.container-center {
   box-sizing: content-box;
   margin: 7vh auto;
   min-height: 60vh;
   max-width: 30vw;
-}
-
-.outer-stack {
   --space: 2.6rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.outer-stack > * {
+.container-center > * {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.outer-stack > * + * {
+.container-center > * + * {
   margin-top: var(--space);
 }
 
-.outer-stack > :nth-child(3) {
+.container-center > :nth-child(3) {
   margin-bottom: auto;
   margin-right: auto;
   margin-left: auto;
@@ -121,20 +119,78 @@ h1 {
   margin: 0;
 }
 
-.input-field {
-  width: 100%;
-  background-color: var(--DarkTheme-Desaturated-Blue);
-  border-radius: 4px;
+/* UI elements */
+.list-item {
+  display: flex;
+  align-items: center;
 }
 
+.list-item + * {
+  margin-right: 0.8rem;
+}
+
+input[type="checkbox"] {
+  height: 25px;
+  width: 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid var(--DarkTheme-Darkest-Grayish-Blue);
+  border-radius: 25px;
+  outline: none;
+  transition-duration: 0.3s;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--primary-gradient);
+}
+
+/* -----FORM----- */
+form {
+  padding: 0.8rem;
+  background-color: var(--DarkTheme-Desaturated-Blue);
+  border-radius: 4px;
+  display: flex;
+}
+
+input[type="text"] {
+  height: 1.6rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--DarkTheme-Light-Blue);
+  flex-grow: 1;
+  background-color: transparent;
+  margin-right: 0.8rem;
+}
+
+/* ----MODAL----- */
 .modal {
   background-color: var(--DarkTheme-Desaturated-Blue);
   display: flex;
   flex-direction: column;
   border-radius: 4px;
+  /* padding: 0.8rem; */
 }
 
 .operations-group {
   display: flex;
   justify-content: space-between;
+  margin: 0.8rem;
+  color: ;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  border-bottom: 0.5px solid var(--DarkTheme-Dark-Grayish-Blue);
+  padding: 0.8rem;
+  font-size: 1rem;
+  color: var(--DarkTheme-Light-Blue);
 }
