@@ -12,9 +12,9 @@ html {
   /* CUSTOM VARIABLES */
   --primary-blue: hsl(220, 98%, 61%);
   --primary-gradient: linear-gradient(
-    to right,
-    hsl(192, 100%, 67%),
-    hsl(280, 87%, 65%)
+    109deg,
+    rgba(87, 221, 255, 1) 0%,
+    rgba(192, 88, 243, 1) 100%
   );
   /* ### Light Theme */
   --LightTheme-Light-Gray: hsl(0, 0%, 98%);
@@ -120,6 +120,14 @@ h1 {
 }
 
 /* UI elements */
+button {
+  background-color: transparent;
+  color: var(--DarkTheme-Light-Blue);
+  cursor: pointer;
+  appearance: none;
+  font-size: 1.6rem;
+  border: none;
+}
 .list-item {
   display: flex;
   align-items: center;
@@ -145,7 +153,9 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background-color: var(--primary-gradient);
+  background: var(--DarkTheme-Hover-Light-Blue);
+  background: var(--primary-gradient);
+  border: 1px solid transparent;
 }
 
 /* -----FORM----- */
