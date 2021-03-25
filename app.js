@@ -21,9 +21,11 @@ const addTodo = (value) => {
 };
 
 const toggleCheck = (e) => {
+  e.preventDefault();
   let item = e.target.parentNode;
   let checkbox = item.querySelector("input");
-  item.querySelector("span").classList.toggle("checkedItem");
+  let todo = item.querySelector("span");
+  todo.classList.toggle("checkedItem");
 
   //   add line through if not present
 
