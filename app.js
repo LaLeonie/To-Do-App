@@ -26,10 +26,6 @@ const toggleCheck = (e) => {
   let checkbox = item.querySelector("input");
   let todo = item.querySelector("span");
   todo.classList.toggle("checkedItem");
-
-  //   add line through if not present
-
-  //    check button if not checked
   checkbox.checked = !checkbox.checked;
 };
 
