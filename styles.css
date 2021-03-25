@@ -152,6 +152,19 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.form-button {
+  display: inline-block;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid var(--DarkTheme-Darkest-Grayish-Blue);
+  padding: 0;
+  margin: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
 input[type="checkbox"]:checked {
   background: var(--DarkTheme-Hover-Light-Blue);
   background: var(--primary-gradient);
@@ -196,6 +209,7 @@ input[type="text"] {
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 li {
@@ -203,4 +217,14 @@ li {
   padding: 0.8rem;
   font-size: 1rem;
   color: var(--DarkTheme-Light-Blue);
+}
+
+li span,
+form input {
+  margin-left: 23px;
+}
+
+.checkedItem {
+  text-decoration: line-through;
+  color: var(--DarkTheme-Dark-Grayish-Blue);
 }

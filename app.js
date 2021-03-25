@@ -20,4 +20,16 @@ const addTodo = (value) => {
   ul.appendChild(li);
 };
 
+const toggleCheck = (e) => {
+  let item = e.target.parentNode;
+  let checkbox = item.querySelector("input");
+  item.querySelector("span").classList.toggle("checkedItem");
+
+  //   add line through if not present
+
+  //    check button if not checked
+  checkbox.checked = !checkbox.checked;
+};
+
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
+document.querySelector("ul").addEventListener("click", toggleCheck);
