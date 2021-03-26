@@ -1,5 +1,6 @@
 let allTodos, allChecked, numberOfUnchecked;
 
+// update counter function
 const updateNumberOfUnchecked = () => {
   allTodos = document.querySelectorAll("li");
   allChecked = document.querySelectorAll(".checkedItem");
@@ -9,6 +10,7 @@ const updateNumberOfUnchecked = () => {
   ).innerHTML = `${numberOfUnchecked}`;
 };
 
+// add neew todo list item
 const handleSubmitForm = (e) => {
   e.preventDefault();
   let input = document.querySelector("input");
@@ -32,6 +34,7 @@ const addTodo = (value) => {
   updateNumberOfUnchecked();
 };
 
+// check/uncheck to do list items
 const toggleCheck = (e) => {
   e.preventDefault();
   let item = e.target.parentNode;
@@ -42,17 +45,37 @@ const toggleCheck = (e) => {
   updateNumberOfUnchecked();
 };
 
-// array with all items, all unchecked items, all checked items
+// hide all checked items
+const hideChecked = () => {
+  if (document.querySelectorAll(".element-hidden").length > 0) {
+    document
+      .querySelectorAll(".element-hidden")
+      .classList.remove(".element-hidden");
+  }
 
-console.log(numberOfUnchecked);
+  console.log(document.querySelectorAll(".checkedItem"));
 
-//add variable counter for all unchecked items
+  if (document.querySelectorAll(".checkedItem").length > 0) {
+    console.log(document.querySelectorAll(".checkedItem"));
+  }
+};
 
-//hide all checked
+// hide all unchecked items
+const hideUnchecked = () => {};
 
-//hide all unchecked
+// show all items
+const showAll = () => {};
 
-//remove all checked
+// remove all checked items
+const removeChecked = () => {};
 
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
 document.querySelector("ul").addEventListener("click", toggleCheck);
+document.querySelector(".show-all").addEventListener("click", showAll);
+document.querySelector(".show-active").addEventListener("click", hideUnchecked);
+document
+  .querySelector(".show-completed")
+  .addEventListener("click", hideChecked);
+document
+  .querySelector(".clear-completed")
+  .addEventListener("click", removeChecked);
