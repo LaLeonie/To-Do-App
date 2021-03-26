@@ -199,13 +199,6 @@ input[type="text"] {
   /* padding: 0.8rem; */
 }
 
-.operations-group {
-  display: flex;
-  justify-content: space-between;
-  margin: 0.8rem;
-  color: ;
-}
-
 ul {
   list-style: none;
   padding: 0;
@@ -227,4 +220,16 @@ form input {
 .checkedItem {
   text-decoration: line-through;
   color: var(--DarkTheme-Dark-Grayish-Blue);
+}
+
+/* modal footer */
+.operations-group {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.8rem;
+  font-size: 0.8rem;
+}
+
+.counter {
+  display: flex;
 }
