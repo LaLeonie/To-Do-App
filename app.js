@@ -1,4 +1,4 @@
-let allTodos, allChecked, numberOfUnchecked;
+let allTodos, allChecked, allActive, numberOfUnchecked, allHidden;
 
 // update counter function
 const updateNumberOfUnchecked = () => {
@@ -29,7 +29,7 @@ const addTodo = (value) => {
 	    <span>${value}</span>
     </label>
     `;
-  li.classList.add("todo-list-item");
+  li.classList.add("todo-list-item", "active");
   ul.appendChild(li);
   updateNumberOfUnchecked();
 };
@@ -37,32 +37,31 @@ const addTodo = (value) => {
 // check/uncheck to do list items
 const toggleCheck = (e) => {
   e.preventDefault();
-  let item = e.target.parentNode;
+  let item = e.target.parentNode.parentNode;
   let checkbox = item.querySelector("input");
   item.classList.toggle("checkedItem");
+  item.classList.toggle("active");
   checkbox.checked = !checkbox.checked;
   updateNumberOfUnchecked();
 };
 
 // hide all checked items
 const hideChecked = () => {
-  if (document.querySelectorAll(".element-hidden").length > 0) {
-    document
-      .querySelectorAll(".element-hidden")
-      .classList.remove(".element-hidden");
-  }
-
-  if (document.querySelectorAll(".checkedItem").length > 0) {
-    allChecked = document.querySelectorAll(".checkedItem");
-    allChecked[0].classList.add("element-hidden");
-  }
+  allChecked = document.querySelectorAll(".checkedItem");
+  allChecked.forEach((el) => el.classList.add("element-hidden"));
 };
 
 // hide all unchecked items
-const hideUnchecked = () => {};
+const hideActive = () => {
+  allActive = document.querySelectorAll(".active");
+  allActive.forEach((el) => el.classList.add("element-hidden"));
+};
 
 // show all items
-const showAll = () => {};
+const showAll = () => {
+  allHidden = document.querySelectorAll(".element-hidden");
+  allHidden.forEach((el) => el.classList.remove("element-hidden"));
+};
 
 // remove all checked items
 const removeChecked = () => {};
@@ -70,10 +69,8 @@ const removeChecked = () => {};
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
 document.querySelector("ul").addEventListener("click", toggleCheck);
 document.querySelector(".show-all").addEventListener("click", showAll);
-document.querySelector(".show-active").addEventListener("click", hideUnchecked);
-document
-  .querySelector(".show-completed")
-  .addEventListener("click", hideChecked);
+document.querySelector(".hide-checked").addEventListener("click", hideChecked);
+document.querySelector(".hide-active").addEventListener("click", hideActive);
 document
   .querySelector(".clear-completed")
   .addEventListener("click", removeChecked);
