@@ -39,8 +39,7 @@ const toggleCheck = (e) => {
   e.preventDefault();
   let item = e.target.parentNode;
   let checkbox = item.querySelector("input");
-  let todo = item.querySelector("span");
-  todo.classList.toggle("checkedItem");
+  item.classList.toggle("checkedItem");
   checkbox.checked = !checkbox.checked;
   updateNumberOfUnchecked();
 };
@@ -53,10 +52,9 @@ const hideChecked = () => {
       .classList.remove(".element-hidden");
   }
 
-  console.log(document.querySelectorAll(".checkedItem"));
-
   if (document.querySelectorAll(".checkedItem").length > 0) {
-    console.log(document.querySelectorAll(".checkedItem"));
+    allChecked = document.querySelectorAll(".checkedItem");
+    allChecked[0].classList.add("element-hidden");
   }
 };
 
