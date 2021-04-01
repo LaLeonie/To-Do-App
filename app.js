@@ -56,22 +56,32 @@ const toggleCheck = (e) => {
   }
 };
 
+const handleModalSelection = (e) => {
+  const allSelectors = e.target.parentNode.querySelectorAll("a");
+  const selector = e.target;
+  allSelectors.forEach((el) => el.classList.remove("active-selection"));
+  selector.classList.add("active-selection");
+};
+
 // hide all checked items
-const hideChecked = () => {
+const hideChecked = (e) => {
   allChecked = document.querySelectorAll(".checkedItem");
   allChecked.forEach((el) => el.classList.add("element-hidden"));
+  handleModalSelection(e);
 };
 
 // hide all unchecked items
-const hideActive = () => {
+const hideActive = (e) => {
   allActive = document.querySelectorAll(".active");
   allActive.forEach((el) => el.classList.add("element-hidden"));
+  handleModalSelection(e);
 };
 
 // show all items
-const showAll = () => {
+const showAll = (e) => {
   allHidden = document.querySelectorAll(".element-hidden");
   allHidden.forEach((el) => el.classList.remove("element-hidden"));
+  handleModalSelection(e);
 };
 
 const removeChecked = () => {

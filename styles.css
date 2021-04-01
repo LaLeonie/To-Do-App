@@ -236,12 +236,26 @@ form input {
   font-size: 0.8rem;
 }
 
-.operations-group a {
+.operations-group a,
+.operations-group div {
+  color: var(--DarkTheme-Grayish-Blue);
   cursor: pointer;
+}
+
+.operations-group a:hover {
+  color: var(--LightTheme-Light-Gray);
+}
+
+.operations-group .active-selection {
+  color: var(--primary-blue);
 }
 
 .counter {
   display: flex;
+}
+
+.counter:hover div {
+  color: var(--LightTheme-Light-Gray);
 }
 
 .element-hidden {
