@@ -39,6 +39,8 @@ const addTodo = (value) => {
     <label class="list-item">
         <input type="checkbox"/>
 	    <span>${value}</span>
+      <img class="cross" src="./images/icon-cross.svg" alt="cross"/>
+  
     </label>
     `;
   li.classList.add("todo-list-item");

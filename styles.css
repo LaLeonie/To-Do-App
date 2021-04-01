@@ -143,8 +143,10 @@ button {
 }
 
 input[type="checkbox"] {
-  height: 25px;
-  width: 25px;
+  margin: 0;
+  padding: 0;
+  height: 24px;
+  width: 24px;
   -webkit-appearance: none;
   -moz-appearance: none;
   -o-appearance: none;
@@ -172,8 +174,8 @@ html.light-theme input[type="checkbox"] {
   border: 1px solid var(--DarkTheme-Darkest-Grayish-Blue);
   padding: 0;
   margin: 0;
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   transition: 0.3s;
 }
@@ -183,14 +185,16 @@ html.light-theme .form-button {
 }
 
 .checkbox-tick {
-  background: var(--DarkTheme-Hover-Light-Blue);
-  background: var(--primary-gradient);
+  background-color: var(--primary-gradient);
+  background-image: url("./images/icon-check.svg");
+  background-position: left top;
+  background-repeat: no-repeat;
   border: 1px solid transparent;
 }
 
 /* -----FORM----- */
 form {
-  padding: 0.8rem;
+  padding: 12px 24px;
   background-color: var(--DarkTheme-Desaturated-Blue);
   border-radius: 4px;
   display: flex;
@@ -236,7 +240,7 @@ ul {
 
 li {
   border-bottom: 0.5px solid var(--DarkTheme-Dark-Grayish-Blue);
-  padding: 0.8rem;
+  padding: 12px 24px;
   font-size: 1rem;
   color: var(--DarkTheme-Light-Blue);
 }
@@ -246,9 +250,17 @@ html.light-theme li {
   color: var(--LightTheme-Darkest-Grayish-Blue);
 }
 
-li span,
-form input {
-  margin-left: 23px;
+.list-item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 40px auto 18px;
+  column-gap: 4px;
+}
+
+li span {
+  display: flex;
+  justify-content: space-between;
+  /* width: 100%; */
 }
 
 .checkedItem {
