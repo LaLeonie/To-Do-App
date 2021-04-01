@@ -74,8 +74,13 @@ const showAll = () => {
   allHidden.forEach((el) => el.classList.remove("element-hidden"));
 };
 
+const removeChecked = () => {
+  let allCompleted = document.querySelectorAll(".checkedItem");
+  let list = document.querySelector("ul");
+  allCompleted.forEach((el) => list.removeChild(el));
+};
+
 // remove all checked items
-const removeChecked = () => {};
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
 document.querySelector("ul").addEventListener("click", toggleCheck);
 document.querySelector(".show-all").addEventListener("click", showAll);
