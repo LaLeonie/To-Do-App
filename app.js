@@ -34,15 +34,26 @@ const addTodo = (value) => {
   updateNumberOfUnchecked();
 };
 
+const toggleHandler = (item) => {
+  console.log(item);
+  let checkbox = item.querySelector("input");
+  checkbox.classList.toggle("checkbox-tick");
+  item.classList.toggle("checkedItem");
+  item.classList.toggle("active");
+  updateNumberOfUnchecked();
+};
+
 // check/uncheck to do list items
 const toggleCheck = (e) => {
   e.preventDefault();
-  let item = e.target.parentNode.parentNode;
-  let checkbox = item.querySelector("input");
-  item.classList.toggle("checkedItem");
-  item.classList.toggle("active");
-  checkbox.checked = !checkbox.checked;
-  updateNumberOfUnchecked();
+  let item = e.target.parentNode;
+  if (item.classList.contains("list-item")) {
+    toggleHandler(item.parentNode);
+  }
+
+  if (item.classList.contains("todo-list-item")) {
+    toggleHandler(item);
+  }
 };
 
 // hide all checked items
@@ -65,7 +76,6 @@ const showAll = () => {
 
 // remove all checked items
 const removeChecked = () => {};
-
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
 document.querySelector("ul").addEventListener("click", toggleCheck);
 document.querySelector(".show-all").addEventListener("click", showAll);

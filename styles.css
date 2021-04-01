@@ -128,7 +128,13 @@ button {
   font-size: 1.6rem;
   border: none;
 }
+
+.todo-list-item {
+  width: 100%;
+}
+
 .list-item {
+  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -165,7 +171,7 @@ input[type="checkbox"] {
   transition: 0.3s;
 }
 
-input[type="checkbox"]:checked {
+.checkbox-tick {
   background: var(--DarkTheme-Hover-Light-Blue);
   background: var(--primary-gradient);
   border: 1px solid transparent;
