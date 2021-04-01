@@ -1,5 +1,17 @@
 let allTodos, allChecked, allActive, numberOfUnchecked, allHidden;
 
+//change theme
+const changeTheme = () => {
+  document.querySelector("html").classList.toggle("light-theme");
+  document.querySelector(".theme-icon").src = document
+    .querySelector("html")
+    .classList.contains("light-theme")
+    ? "./images/icon-moon.svg"
+    : "./images/icon-sun.svg";
+};
+
+document.querySelector(".theme-button").addEventListener("click", changeTheme);
+
 // update counter function
 const updateNumberOfUnchecked = () => {
   allTodos = document.querySelectorAll("li");
@@ -29,17 +41,15 @@ const addTodo = (value) => {
 	    <span>${value}</span>
     </label>
     `;
-  li.classList.add("todo-list-item", "active");
+  li.classList.add("todo-list-item");
   ul.appendChild(li);
   updateNumberOfUnchecked();
 };
 
 const toggleHandler = (item) => {
-  console.log(item);
   let checkbox = item.querySelector("input");
   checkbox.classList.toggle("checkbox-tick");
   item.classList.toggle("checkedItem");
-  item.classList.toggle("active");
   updateNumberOfUnchecked();
 };
 
@@ -60,11 +70,20 @@ const handleModalSelection = (e) => {
   const allSelectors = e.target.parentNode.querySelectorAll("a");
   const selector = e.target;
   allSelectors.forEach((el) => el.classList.remove("active-selection"));
-  selector.classList.add("active-selection");
+  if (selector.parentNode.classList.contains("filter-group")) {
+    selector.classList.add("active-selection");
+  }
+};
+
+//reset
+const reset = () => {
+  allHidden = document.querySelectorAll(".element-hidden");
+  allHidden.forEach((el) => el.classList.remove("element-hidden"));
 };
 
 // hide all checked items
 const hideChecked = (e) => {
+  reset();
   allChecked = document.querySelectorAll(".checkedItem");
   allChecked.forEach((el) => el.classList.add("element-hidden"));
   handleModalSelection(e);
@@ -72,22 +91,27 @@ const hideChecked = (e) => {
 
 // hide all unchecked items
 const hideActive = (e) => {
-  allActive = document.querySelectorAll(".active");
-  allActive.forEach((el) => el.classList.add("element-hidden"));
+  reset();
+  allElements = document.querySelectorAll("li");
+  allElements.forEach((el) => {
+    if (!el.classList.contains("checkedItem")) {
+      el.classList.add("element-hidden");
+    }
+  });
   handleModalSelection(e);
 };
 
 // show all items
 const showAll = (e) => {
-  allHidden = document.querySelectorAll(".element-hidden");
-  allHidden.forEach((el) => el.classList.remove("element-hidden"));
+  reset();
   handleModalSelection(e);
 };
 
-const removeChecked = () => {
+const removeChecked = (e) => {
   let allCompleted = document.querySelectorAll(".checkedItem");
   let list = document.querySelector("ul");
   allCompleted.forEach((el) => list.removeChild(el));
+  showAll(e);
 };
 
 // remove all checked items
