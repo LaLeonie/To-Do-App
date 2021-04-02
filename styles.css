@@ -142,31 +142,6 @@ button {
   margin-right: 0.8rem;
 }
 
-input[type="checkbox"] {
-  margin: 0;
-  padding: 0;
-  height: 24px;
-  width: 24px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  border: 1px solid var(--DarkTheme-Dark-Grayish-Blue);
-  border-radius: 25px;
-  outline: none;
-  transition-duration: 0.3s;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.list-item:hover input[type="checkbox"] {
-  border: 1px solid linear-gradient(135deg, #55ddff 0%, #c058f3 100%);
-}
-
-html.light-theme input[type="checkbox"] {
-  border: 1px solid var(--LightTheme-Light-Grayish-Blue);
-}
-
 .form-button {
   display: inline-block;
   text-decoration: none;
@@ -177,19 +152,10 @@ html.light-theme input[type="checkbox"] {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  transition: 0.3s;
 }
 
 html.light-theme .form-button {
   border: 1px solid var(--LightTheme-Light-Grayish-Blue);
-}
-
-.checkbox-tick {
-  background-color: var(--primary-gradient);
-  background-image: url("./images/icon-check.svg");
-  background-position: left top;
-  background-repeat: no-repeat;
-  border: 1px solid transparent;
 }
 
 /* -----FORM----- */
@@ -263,6 +229,40 @@ li span {
   /* width: 100%; */
 }
 
+.checkbox {
+  margin: 0;
+  padding: 0;
+  height: 24px;
+  width: 24px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: 1px solid var(--DarkTheme-Dark-Grayish-Blue);
+  border-radius: 25px;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* input[type="checkbox"]:hover {
+  border-radius: 25px;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, #55ddff 0%, #c058f3 100%) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+} */
+
+.checkbox.checkbox-tick {
+  background-image: url("./images/icon-check.svg"),
+    linear-gradient(135deg, #55ddff 0%, #c058f3 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid;
+  border-image: linear-gradient(135deg, #55ddff 0%, #c058f3 100%) 1;
+}
+
 .checkedItem {
   text-decoration: line-through;
   color: var(--DarkTheme-Dark-Grayish-Blue);
@@ -272,35 +272,49 @@ html.light-theme .checkedItem {
   color: var(--LightTheme-Light-Grayish-Blue);
 }
 
+.cross {
+  cursor: pointer;
+}
+
 /* modal footer */
 .operations-group {
   display: flex;
   justify-content: space-between;
-  margin: 0.8rem;
+  margin: 20px 24px;
   font-size: 0.8rem;
 }
 
-.operations-group a,
-.operations-group div {
+a,
+div {
   color: var(--DarkTheme-Grayish-Blue);
   cursor: pointer;
 }
 
-html.light-theme .operations-group a,
-html.light-theme .operations-group div {
+html.light-theme a,
+html.light-theme div {
   color: var(--LightTheme-Dark-Grayish-Blue);
 }
 
-.operations-group a:hover {
+a:hover {
   color: var(--LightTheme-Light-Gray);
 }
 
-html.light-theme .operations-group a:hover {
+html.light-theme a:hover {
   color: var(--LightTheme-Darkest-Grayish-Blue);
 }
 
-.operations-group .active-selection {
+.filter-group {
+  min-width: 166px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-group .active-selection {
   color: var(--primary-blue);
+}
+
+.filter-group.mobile {
+  display: none;
 }
 
 .counter {
@@ -317,4 +331,62 @@ html.light-theme .counter:hover div {
 
 .element-hidden {
   display: none;
+}
+
+.instructions {
+  margin: 30px auto;
+  font-weight: 400;
+}
+
+/* media queries */
+@media all and (max-width: 375px) {
+  :root {
+    font-size: 12px;
+  }
+  html {
+    background: url(./images/bg-mobile-dark.jpg) center top no-repeat;
+  }
+
+  html.light-theme {
+    background: url(./images/bg-mobile-light.jpg) center top no-repeat;
+    background-color: var(--LightTheme-Light-Gray);
+  }
+
+  .container-center {
+    box-sizing: content-box;
+    margin: 7vh auto;
+    min-height: 60vh;
+    max-width: 90vw;
+    --space: 2.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  h1 {
+    font-size: 27px;
+  }
+
+  .filter-group.desktop {
+    display: none;
+  }
+
+  .operations-group {
+    font-size: 12px;
+    margin: 22px 20px;
+  }
+
+  .filter-group.mobile {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--DarkTheme-Desaturated-Blue);
+    border-radius: 4px;
+    margin: 16px 0px;
+    padding: 15px 81px;
+    color: var(--DarkTheme-Grayish-Blue);
+  }
+
+  html.light-theme .filter-group.mobile {
+    color: var(--LightTheme-Dark-Grayish-Blue);
+  }
 }

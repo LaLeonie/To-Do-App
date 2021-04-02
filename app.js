@@ -77,6 +77,7 @@ const toggleCheck = (e) => {
 const handleModalSelection = (e) => {
   const allSelectors = e.target.parentNode.querySelectorAll("a");
   const selector = e.target;
+  console.log(selector);
   allSelectors.forEach((el) => el.classList.remove("active-selection"));
   if (selector.parentNode.classList.contains("filter-group")) {
     selector.classList.add("active-selection");
@@ -111,6 +112,7 @@ const hideActive = (e) => {
 
 // show all items
 const showAll = (e) => {
+  console.log("all shown");
   reset();
   handleModalSelection(e);
 };
@@ -148,3 +150,29 @@ document
   .addEventListener("click", removeChecked);
 document.querySelector("ul").addEventListener("mouseover", hoverListitem);
 document.querySelector("ul").addEventListener("mouseout", unhoverListitem);
+console.log(document.querySelector(".hide-checked"));
+
+//media query
+const mobileFilterHandler = (e) => {
+  let itemClass = e.target.classList;
+
+  if (itemClass.contains("hide-checked")) {
+    hideChecked(e);
+  }
+
+  if (itemClass.contains("show-all")) {
+    showAll(e);
+  }
+
+  if (itemClass.contains("hide-active")) {
+    hideActive(e);
+  }
+};
+
+const mediaQuery = window.matchMedia("(max-width: 375px)");
+
+if (mediaQuery.matches) {
+  document
+    .querySelector(".filter-group.mobile")
+    .addEventListener("click", mobileFilterHandler);
+}
