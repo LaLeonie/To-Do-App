@@ -37,8 +37,8 @@ const addTodo = (value) => {
   const li = document.createElement("li");
   li.innerHTML = `
     <label class="list-item">
-        <input type="checkbox"/>
-	    <span>${value}</span>
+        <input class="checkbox" type="checkbox"/>
+	    <span class="todo-text">${value}</span>
       <img class="cross" src="./images/icon-cross.svg" alt="cross"/>
   
     </label>
@@ -59,13 +59,19 @@ const toggleHandler = (item) => {
 const toggleCheck = (e) => {
   e.preventDefault();
   let item = e.target.parentNode;
-  if (item.classList.contains("list-item")) {
+  let classes = e.target.classList;
+  if (classes.contains("cross")) {
+    let list = document.querySelector("ul");
+    list.removeChild(item.parentNode);
+  } else if (classes.contains("list-item")) {
+    toggleHandler(item);
+  } else if (classes.contains("todo-list-item")) {
+    toggleHandler(e.target);
+    return;
+  } else {
     toggleHandler(item.parentNode);
   }
-
-  if (item.classList.contains("todo-list-item")) {
-    toggleHandler(item);
-  }
+  updateNumberOfUnchecked();
 };
 
 const handleModalSelection = (e) => {
@@ -116,7 +122,22 @@ const removeChecked = (e) => {
   showAll(e);
 };
 
-// remove all checked items
+// adds hover to list item
+const hoverListitem = (e) => {
+  let item = e.target;
+  if (item.classList.contains("cross")) {
+    item.src = "./images/icon-cross-white.svg";
+  }
+};
+
+const unhoverListitem = (e) => {
+  let item = e.target;
+  if (item.classList.contains("cross")) {
+    item.src = "./images/icon-cross.svg";
+  }
+};
+
+//add event listeners
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
 document.querySelector("ul").addEventListener("click", toggleCheck);
 document.querySelector(".show-all").addEventListener("click", showAll);
@@ -125,3 +146,5 @@ document.querySelector(".hide-active").addEventListener("click", hideActive);
 document
   .querySelector(".clear-completed")
   .addEventListener("click", removeChecked);
+document.querySelector("ul").addEventListener("mouseover", hoverListitem);
+document.querySelector("ul").addEventListener("mouseout", unhoverListitem);
