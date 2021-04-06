@@ -44,6 +44,12 @@ const addTodo = (value) => {
     </label>
     `;
   li.classList.add("todo-list-item");
+  //event listener for drag and drop
+  li.setAttribute("draggable", true);
+  li.addEventListener("dragstart", dragStart);
+  li.addEventListener("dragend", dragEnd);
+  // li.addEventListener("dragleave", dragLeave);
+  // li.addEventListener("drop", drop);
   ul.appendChild(li);
   updateNumberOfUnchecked();
 };
@@ -139,6 +145,25 @@ const unhoverListitem = (e) => {
   }
 };
 
+//drag and drop
+const container = document.querySelector("ul");
+
+const dragStart = (e) => {
+  const item = e.target;
+  item.classList.add("dragging");
+};
+
+const dragEnd = (e) => {
+  e.target.classList.remove("dragging");
+};
+
+const dragOver = (e) => {
+  e.preventDefault();
+  const draggable = document.querySelector(".dragging");
+  container.appendChild(draggable);
+  console.log("drag over");
+};
+
 //add event listeners
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
 document.querySelector("ul").addEventListener("click", toggleCheck);
@@ -150,7 +175,7 @@ document
   .addEventListener("click", removeChecked);
 document.querySelector("ul").addEventListener("mouseover", hoverListitem);
 document.querySelector("ul").addEventListener("mouseout", unhoverListitem);
-console.log(document.querySelector(".hide-checked"));
+container.addEventListener("dragover", dragOver);
 
 //media query
 const mobileFilterHandler = (e) => {

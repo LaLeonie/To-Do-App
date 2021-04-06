@@ -338,6 +338,11 @@ html.light-theme .counter:hover div {
   font-weight: 400;
 }
 
+/* drag and drop */
+.dragging {
+  opacity: 0.6;
+}
+
 /* media queries */
 @media all and (max-width: 375px) {
   :root {
