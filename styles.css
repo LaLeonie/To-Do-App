@@ -395,7 +395,16 @@ html.light-theme .counter:hover div {
     color: var(--DarkTheme-Grayish-Blue);
   }
 
+  html.light-theme .modal {
+    color: var(--LightTheme-Dark-Grayish-Blue);
+    background-color: #fff;
+  }
   html.light-theme .filter-group.mobile {
     color: var(--LightTheme-Dark-Grayish-Blue);
+    background-color: #fff;
+  }
+
+  .instructions {
+    margin: 15px auto;
   }
 }
