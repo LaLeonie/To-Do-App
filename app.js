@@ -48,8 +48,6 @@ const addTodo = (value) => {
   li.setAttribute("draggable", true);
   li.addEventListener("dragstart", dragStart);
   li.addEventListener("dragend", dragEnd);
-  // li.addEventListener("dragleave", dragLeave);
-  // li.addEventListener("drop", drop);
   ul.appendChild(li);
   updateNumberOfUnchecked();
 };

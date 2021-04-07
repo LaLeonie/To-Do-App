@@ -14,7 +14,7 @@ This is my solution to the [Todo app challenge on Frontend Mentor](https://www.f
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 
-## Overview
+## Overviewl
 
 ### The challenge
 
