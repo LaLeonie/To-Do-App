@@ -382,6 +382,9 @@ html.light-theme .counter:hover div {
   }
 
   .filter-group.mobile {
+    box-sizing: content-box;
+    margin: 7vh auto;
+    max-width: 90vw;
     display: flex;
     justify-content: space-between;
     background-color: var(--DarkTheme-Desaturated-Blue);
