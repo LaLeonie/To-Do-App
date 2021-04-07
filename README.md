@@ -13,8 +13,6 @@ This is my solution to the [Todo app challenge on Frontend Mentor](https://www.f
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -37,18 +35,9 @@ Users should be able to:
 ![Desktop screenshot](./images/screenshots/Desktop_screenshot.png)
 <img src="./images/screenshots/Mobile_screenshot.png" width="375" >
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
-
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+[Live Site URL](https://laleonie.github.io/To-Do-App/)
 
 ## My process
 
@@ -58,62 +47,80 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - CSS custom properties
 - Flexbox
 - CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- Vanilla JavaScript
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
+- In replicating the provided design, I learned a lot about using background images in CSS. For instance, I learned to create a custom checkbox by adding two background images on top of each other.
 
 ```css
-.proud-of-this-css {
-  color: papayawhip;
+.checkbox.checkbox-tick {
+  background-image: url("./images/icon-check.svg"), linear-gradient(135deg, #55ddff
+        0%, #c058f3 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid;
+  border-image: linear-gradient(135deg, #55ddff 0%, #c058f3 100%) 1;
 }
 ```
 
+- I was careful to keep my code DRY and all functions pure, for instance by extracting the counter functionality into a separate **updateNumberOfUnchecked** function.
+
 ```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
+const updateNumberOfUnchecked = () => {
+  allTodos = document.querySelectorAll("li");
+  allChecked = document.querySelectorAll(".checkedItem");
+  numberOfUnchecked = allTodos.length - allChecked.length;
+  document.querySelector(
+    "#numberOfUnchecked"
+  ).innerHTML = `${numberOfUnchecked}`;
 };
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+- I learned to execute media queries with JavaScript instead of CSS. This approach was necessary to add event listeners to a DOM element that is hidden in desktop view. The mobileFilterHandler function calls functions that are also called in the desktop event listeners.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+```js
+const mediaQuery = window.matchMedia("(max-width: 375px)");
+
+if (mediaQuery.matches) {
+  document
+    .querySelector(".filter-group.mobile")
+    .addEventListener("click", mobileFilterHandler);
+}
+```
+
+- I learned to add drag & drop functionality to reorder the list, using the helper function **getDragAfterElement** to identify the closest next list item.
+
+```js
+const getDragAfterElement = (container, y) => {
+  const draggableElements = [
+    ...container.querySelectorAll("li:not(.dragging)"),
+  ];
+  return draggableElements.reduce(
+    (closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    },
+    {
+      offset: Number.NEGATIVE_INFINITY,
+    }
+  ).element;
+};
+```
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+This project has highlighted to me, that I need to ...
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+- use CSS naming methodologies to keep my stylesheet neater
+- learn more about CSS layout
+- learn more JavaScript patterns to refactor my code
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
-
-## Author
-
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- [How To Build Sortable Drag & Drop With Vanilla Javascript](https://www.youtube.com/watch?v=jfYWwQrtzzY&ab_channel=WebDevSimplified) - I used this tutorial to learn how to implement the drag & drop functionality.
