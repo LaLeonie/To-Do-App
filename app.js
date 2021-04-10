@@ -1,15 +1,16 @@
 let allTodos, allChecked, allActive, numberOfUnchecked, allHidden, listArray;
-
 const ul = document.querySelector("ul");
-
 //handle local Storage
+//listArray = [{id, value, checked}]
+
 listArray = JSON.parse(localStorage.getItem("todoList"));
 
 if (!listArray) {
   listArray = [];
   localStorage.setItem("todoList", JSON.stringify(listArray));
-  console.log(localStorage);
 }
+
+console.log(localStorage);
 
 //change theme
 const changeTheme = () => {
@@ -25,9 +26,7 @@ document.querySelector(".theme-button").addEventListener("click", changeTheme);
 
 // update counter function
 const updateNumberOfUnchecked = () => {
-  allTodos = document.querySelectorAll("li");
-  allChecked = document.querySelectorAll(".checkedItem");
-  numberOfUnchecked = allTodos.length - allChecked.length;
+  numberOfUnchecked = listArray.filter((el) => !el.checked).length;
   document.querySelector(
     "#numberOfUnchecked"
   ).innerHTML = `${numberOfUnchecked}`;
@@ -36,59 +35,104 @@ const updateNumberOfUnchecked = () => {
 // add new todo list item
 const handleSubmitForm = (e) => {
   e.preventDefault();
+  let listItemId = Date.now();
   let input = document.querySelector("input");
-  if (input.value != "") {
-    listArray.push(input.value);
-    localStorage.setItem("todoList", JSON.stringify(listArray));
-    console.log(localStorage);
-    addTodo(input.value);
+
+  if (input.value) {
+    addToStorage(listItemId, input.value, false);
+    addToDOM(listItemId, input.value);
   }
   input.value = "";
+  listItemId = "";
 };
 
-const addTodo = (value) => {
+//adding items
+const addToStorage = (id, value, checked) => {
+  listArray.push({ id, value, checked });
+  localStorage.setItem("todoList", JSON.stringify(listArray));
+};
+
+const addToDOM = (id, value, checked) => {
   const li = document.createElement("li");
   li.innerHTML = `
     <label class="list-item">
-        <input aria-label="tick item" class="checkbox" type="checkbox"/>
+        <input aria-label="tick item" class="checkbox ${
+          checked ? "checkbox-tick" : ""
+        }" type="checkbox"/>
 	    <span class="todo-text">${value}</span>
       <img class="cross" src="./images/icon-cross.svg" alt="cross"/>
-  
     </label>
     `;
-  li.classList.add("todo-list-item");
-  //event listener for drag and drop
+
   li.setAttribute("draggable", true);
+  li.setAttribute("id", id);
+  li.classList.add("todo-list-item");
+  if (checked) {
+    li.classList.add("checkedItem");
+  }
+  //item Click event lister
+  li.querySelector("input").addEventListener("click", handleItemClick);
+  li.querySelector("span").addEventListener("click", handleItemClick);
+
+  //cross click event listener
+  li.querySelector("img").addEventListener("click", handleCrossClick);
+
+  //event listener for drag and drop
   li.addEventListener("dragstart", dragStart);
   li.addEventListener("dragend", dragEnd);
   ul.appendChild(li);
   updateNumberOfUnchecked();
 };
 
-const toggleHandler = (item) => {
-  let checkbox = item.querySelector("input");
-  checkbox.classList.toggle("checkbox-tick");
-  item.classList.toggle("checkedItem");
-  updateNumberOfUnchecked();
+//removing items
+const removeFromStorage = (id) => {};
+
+const removeFromDOM = (id) => {};
+
+//changing checked status
+const changeInStorage = (nodeId) => {
+  const newListArray = listArray.map((el) =>
+    el.id == nodeId ? { ...el, checked: !el.checked } : el
+  );
+  listArray = newListArray;
+  localStorage.setItem("todoList", JSON.stringify(listArray));
+
+  console.log(JSON.parse(localStorage.getItem("todoList")));
+};
+
+const changeInDOM = (node) => {
+  console.log(node);
+  node.querySelector("input").classList.toggle("checkbox-tick");
+  node.classList.toggle("checkedItem");
 };
 
 // check/uncheck to do list items
-const toggleCheck = (e) => {
+const handleItemClick = (e) => {
   e.preventDefault();
-  let item = e.target.parentNode;
-  let classes = e.target.classList;
-  if (classes.contains("cross")) {
-    let list = document.querySelector("ul");
-    list.removeChild(item.parentNode);
-  } else if (classes.contains("list-item")) {
-    toggleHandler(item);
-  } else if (classes.contains("todo-list-item")) {
-    toggleHandler(e.target);
-    return;
-  } else {
-    toggleHandler(item.parentNode);
-  }
+  const container = e.target.parentNode.parentNode;
+  const nodeId = container.id;
+  changeInDOM(container);
+  changeInStorage(nodeId);
   updateNumberOfUnchecked();
+
+  // let item = ;
+  // let classes = e.target.classList;
+  // if (classes.contains("cross")) {
+  //   let list = document.querySelector("ul");
+  //   list.removeChild(item.parentNode);
+  // } else if (classes.contains("list-item")) {
+  //   toggleHandler(item);
+  // } else if (classes.contains("todo-list-item")) {
+  //   toggleHandler(e.target);
+  //   return;
+  // } else {
+  //   toggleHandler(item.parentNode);
+  // }
+};
+
+const handleCrossClick = (e) => {
+  e.preventDefault();
+  console.log(e.target);
 };
 
 const handleModalSelection = (e) => {
@@ -200,11 +244,10 @@ const getDragAfterElement = (container, y) => {
 };
 
 //handle local Storage
-listArray.map((el) => addTodo(el));
+listArray.map((el) => addToDOM(el.id, el.value, el.checked));
 
 //add event listeners
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
-document.querySelector("ul").addEventListener("click", toggleCheck);
 document.querySelector(".show-all").addEventListener("click", showAll);
 document.querySelector(".hide-checked").addEventListener("click", hideChecked);
 document.querySelector(".hide-active").addEventListener("click", hideActive);
