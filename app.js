@@ -1,19 +1,32 @@
-let allTodos, allChecked, allActive, numberOfUnchecked, allHidden, listArray;
+let allTodos,
+  allChecked,
+  allActive,
+  numberOfUnchecked,
+  allHidden,
+  listArray,
+  theme;
 const list = document.querySelector("ul");
 //handle local Storage
 //listArray = [{id, value, checked}]
 
 listArray = JSON.parse(localStorage.getItem("todoList"));
+theme = JSON.parse(localStorage.getItem("light-theme"));
 
 if (!listArray) {
   listArray = [];
   localStorage.setItem("todoList", JSON.stringify(listArray));
 }
 
-console.log(localStorage);
+if (!theme) {
+  localStorage.setItem("light-theme", false);
+} else {
+  document.querySelector("html").classList.toggle("light-theme");
+}
 
 //change theme
 const changeTheme = () => {
+  const lightTheme = JSON.parse(localStorage.getItem("light-theme"));
+  localStorage.setItem("light-theme", JSON.stringify(!lightTheme));
   document.querySelector("html").classList.toggle("light-theme");
   document.querySelector(".theme-icon").src = document
     .querySelector("html")
@@ -109,7 +122,7 @@ const changeInDOM = (node) => {
   node.classList.toggle("checkedItem");
 };
 
-// check/uncheck to do list items
+// toggles list items checked status
 const handleItemClick = (e) => {
   e.preventDefault();
   const container = e.target.parentNode.parentNode;
@@ -119,6 +132,7 @@ const handleItemClick = (e) => {
   updateNumberOfUnchecked();
 };
 
+// removes list items
 const handleCrossClick = (e) => {
   e.preventDefault();
   const liNode = e.target.parentNode.parentNode;
@@ -131,7 +145,6 @@ const handleCrossClick = (e) => {
 const handleModalSelection = (e) => {
   const allSelectors = e.target.parentNode.querySelectorAll("a");
   const selector = e.target;
-
   allSelectors.forEach((el) => el.classList.remove("active-selection"));
   if (selector.parentNode.classList.contains("filter-group")) {
     selector.classList.add("active-selection");
@@ -166,7 +179,6 @@ const hideActive = (e) => {
 
 // show all items
 const showAll = (e) => {
-  console.log("all shown");
   reset();
   handleModalSelection(e);
 };
