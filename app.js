@@ -1,4 +1,15 @@
-let allTodos, allChecked, allActive, numberOfUnchecked, allHidden;
+let allTodos, allChecked, allActive, numberOfUnchecked, allHidden, listArray;
+
+const ul = document.querySelector("ul");
+
+//handle local Storage
+listArray = JSON.parse(localStorage.getItem("todoList"));
+
+if (!listArray) {
+  listArray = [];
+  localStorage.setItem("todoList", JSON.stringify(listArray));
+  console.log(localStorage);
+}
 
 //change theme
 const changeTheme = () => {
@@ -22,18 +33,20 @@ const updateNumberOfUnchecked = () => {
   ).innerHTML = `${numberOfUnchecked}`;
 };
 
-// add neew todo list item
+// add new todo list item
 const handleSubmitForm = (e) => {
   e.preventDefault();
   let input = document.querySelector("input");
   if (input.value != "") {
+    listArray.push(input.value);
+    localStorage.setItem("todoList", JSON.stringify(listArray));
+    console.log(localStorage);
     addTodo(input.value);
   }
   input.value = "";
 };
 
 const addTodo = (value) => {
-  const ul = document.querySelector("ul");
   const li = document.createElement("li");
   li.innerHTML = `
     <label class="list-item">
@@ -185,6 +198,9 @@ const getDragAfterElement = (container, y) => {
     }
   ).element;
 };
+
+//handle local Storage
+listArray.map((el) => addTodo(el));
 
 //add event listeners
 document.querySelector("form").addEventListener("submit", handleSubmitForm);
