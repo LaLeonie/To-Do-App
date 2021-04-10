@@ -37,7 +37,7 @@ const addTodo = (value) => {
   const li = document.createElement("li");
   li.innerHTML = `
     <label class="list-item">
-        <input class="checkbox" type="checkbox"/>
+        <input aria-label="tick item" class="checkbox" type="checkbox"/>
 	    <span class="todo-text">${value}</span>
       <img class="cross" src="./images/icon-cross.svg" alt="cross"/>
   
