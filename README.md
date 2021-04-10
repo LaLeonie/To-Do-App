@@ -1,6 +1,6 @@
 # Frontend Mentor - Todo app solution
 
-This is my solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). I used Frontend Mentor to improve my frontend coding skills by building realistic projects. I thoroughly enjoyed this challenge. It was my first Vanilla Js project in a while and it made me hungry for more. 
+This is my solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). I used Frontend Mentor to improve my frontend coding skills by building realistic projects. I thoroughly enjoyed this challenge. It was my first Vanilla Js project in a while and it made me hungry for more.
 
 ## Table of contents
 
@@ -51,7 +51,7 @@ Users should be able to:
 
 ### What I learned
 
-- In replicating the provided design, I learned a few things about background images and layout in CSS. Overlowing elements are still a bit of a mystery to me, but for now, I'm proud that I've created a pretty little custom checkbox with two background images: 
+- In replicating the provided design, I learned a few things about background images and layout in CSS. Overlowing elements are still a bit of a mystery to me, but for now, I'm proud that I've created a pretty little custom checkbox with two background images:
 
 ```css
 .checkbox.checkbox-tick {
@@ -64,7 +64,7 @@ Users should be able to:
 }
 ```
 
-- I was careful to keep my code DRY and all functions pure, for instance by extracting the counter functionality into a separate **updateNumberOfUnchecked** function. I still think there's room forr improvement and refactoring is definitely something I want to focus more on in the future. 
+- I was careful to keep my code DRY and all functions pure, for instance by extracting the counter functionality into a separate **updateNumberOfUnchecked** function. I still think there's room forr improvement and refactoring is definitely something I want to focus more on in the future.
 
 ```js
 const updateNumberOfUnchecked = () => {
@@ -89,7 +89,7 @@ if (mediaQuery.matches) {
 }
 ```
 
-- I learned to add **drag & drop** functionality to reorder the list, using the helper function **getDragAfterElement** to identify the closest next list item. This function certainly required a bit of mind gymnastics on my part, mainly due to the reduce function. 
+- I learned to add **drag & drop** functionality to reorder the list, using the helper function **getDragAfterElement** to identify the closest next list item. This function certainly required a bit of mind gymnastics on my part, mainly due to the reduce function.
 
 ```js
 const getDragAfterElement = (container, y) => {
@@ -113,6 +113,8 @@ const getDragAfterElement = (container, y) => {
 };
 ```
 
+- Following a (code review by @RocTanweer)[https://www.frontendmentor.io/solutions/to-do-app-FbnfuwNVV#feedback], I've implemented localStorage to save to do list items and theme status in the browser cache. In doing so, I came to realise that it is a lot more efficient and concise to save the user input in a dedicated array which is subsequently referenced by the DOM and the storage.
+
 ### Continued development
 
 This project has highlighted to me, that I need to ...
@@ -121,9 +123,9 @@ This project has highlighted to me, that I need to ...
 - learn more about CSS layout
 - learn more JavaScript patterns to refactor my code
 
-I also didn't achieve the gradient border effect on checkbox hover. Who would have thought that gradient borders are so complicated :weary: Definitely something on the still-to-learn-list. 
+I also didn't achieve the gradient border effect on checkbox hover. Who would have thought that gradient borders are so complicated :weary: Definitely something on the still-to-learn-list.
 
 ### Useful resources
 
 - [How To Build Sortable Drag & Drop With Vanilla Javascript](https://www.youtube.com/watch?v=jfYWwQrtzzY&ab_channel=WebDevSimplified) - I used this tutorial to learn how to implement the drag & drop functionality.
-- [Every Layout](https://every-layout.dev/layouts/) - this interactive resource is gold dust for creating common CSS layouts - all responsive without media queries :astonished: 
+- [Every Layout](https://every-layout.dev/layouts/) - this interactive resource is gold dust for creating common CSS layouts - all responsive without media queries :astonished:
