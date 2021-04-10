@@ -299,6 +299,13 @@ a:hover {
   color: var(--LightTheme-Light-Gray);
 }
 
+a:focus,
+button:focus,
+li:focus,
+.list-item input:focus {
+  box-shadow: 0 0 0 3px var(--primary-blue);
+}
+
 html.light-theme a:hover {
   color: var(--LightTheme-Darkest-Grayish-Blue);
 }

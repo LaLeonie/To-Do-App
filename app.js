@@ -84,7 +84,8 @@ const addToDOM = (id, value, checked) => {
     li.classList.add("checkedItem");
   }
   //item Click event lister
-  li.querySelector("input").addEventListener("click", handleItemClick);
+  li.querySelector("input").addEventListener("change", handleItemClick);
+
   li.querySelector("span").addEventListener("click", handleItemClick);
 
   //cross click event listener
@@ -207,7 +208,6 @@ const unhoverListitem = (e) => {
 
 //drag and drop
 const container = document.querySelector("ul");
-
 const dragStart = (e) => {
   const item = e.target;
   item.classList.add("dragging");
