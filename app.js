@@ -1,5 +1,5 @@
 let allTodos, allChecked, allActive, numberOfUnchecked, allHidden, listArray;
-const ul = document.querySelector("ul");
+const list = document.querySelector("ul");
 //handle local Storage
 //listArray = [{id, value, checked}]
 
@@ -80,14 +80,20 @@ const addToDOM = (id, value, checked) => {
   //event listener for drag and drop
   li.addEventListener("dragstart", dragStart);
   li.addEventListener("dragend", dragEnd);
-  ul.appendChild(li);
+  list.appendChild(li);
   updateNumberOfUnchecked();
 };
 
 //removing items
-const removeFromStorage = (id) => {};
+const removeFromStorage = (id) => {
+  const newListArray = listArray.filter((el) => el.id != id);
+  listArray = newListArray;
+  localStorage.setItem("todoList", JSON.stringify(listArray));
+};
 
-const removeFromDOM = (id) => {};
+const removeFromDOM = (node) => {
+  list.removeChild(node);
+};
 
 //changing checked status
 const changeInStorage = (nodeId) => {
@@ -96,12 +102,9 @@ const changeInStorage = (nodeId) => {
   );
   listArray = newListArray;
   localStorage.setItem("todoList", JSON.stringify(listArray));
-
-  console.log(JSON.parse(localStorage.getItem("todoList")));
 };
 
 const changeInDOM = (node) => {
-  console.log(node);
   node.querySelector("input").classList.toggle("checkbox-tick");
   node.classList.toggle("checkedItem");
 };
@@ -110,35 +113,25 @@ const changeInDOM = (node) => {
 const handleItemClick = (e) => {
   e.preventDefault();
   const container = e.target.parentNode.parentNode;
-  const nodeId = container.id;
+  const liNodeId = container.id;
   changeInDOM(container);
-  changeInStorage(nodeId);
+  changeInStorage(liNodeId);
   updateNumberOfUnchecked();
-
-  // let item = ;
-  // let classes = e.target.classList;
-  // if (classes.contains("cross")) {
-  //   let list = document.querySelector("ul");
-  //   list.removeChild(item.parentNode);
-  // } else if (classes.contains("list-item")) {
-  //   toggleHandler(item);
-  // } else if (classes.contains("todo-list-item")) {
-  //   toggleHandler(e.target);
-  //   return;
-  // } else {
-  //   toggleHandler(item.parentNode);
-  // }
 };
 
 const handleCrossClick = (e) => {
   e.preventDefault();
-  console.log(e.target);
+  const liNode = e.target.parentNode.parentNode;
+  const liNodeId = liNode.id;
+  removeFromDOM(liNode);
+  removeFromStorage(liNodeId);
+  updateNumberOfUnchecked();
 };
 
 const handleModalSelection = (e) => {
   const allSelectors = e.target.parentNode.querySelectorAll("a");
   const selector = e.target;
-  console.log(selector);
+
   allSelectors.forEach((el) => el.classList.remove("active-selection"));
   if (selector.parentNode.classList.contains("filter-group")) {
     selector.classList.add("active-selection");
